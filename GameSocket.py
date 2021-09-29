@@ -34,12 +34,14 @@ class GameSocket:
     def send_data(self, data):
         """
         Send data to server in UTF-8 encoding
-
         :param data: string data
         :return: Void
         """
         data = data.encode('utf8')
-        self.sock.sendall(data)
+        try:
+            self.sock.sendall(data)
+        except SocketError:
+            print("No connected")
 
     def close_socket(self):
         self.sock.close()
